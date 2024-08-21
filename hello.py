@@ -1,7 +1,7 @@
 import argparse
 
 def main():
-    parser = argparse.ArgumentParser(description="A simple script example.")
+    parser = argparse.ArgumentParser(description="EXEMPLO.")
     parser.add_argument('name', type=str, help="Your name")
     args = parser.parse_args()
     
