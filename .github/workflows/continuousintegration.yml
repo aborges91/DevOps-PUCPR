@@ -46,5 +46,7 @@ discord:
       - name: Run Discord Webhook
         uses: johnnyhuy/actions-discord-git-webhook@main
         with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          template: "avatar-with-link"
+          include-extras: true
           
