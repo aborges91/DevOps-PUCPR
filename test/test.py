@@ -1,32 +1,26 @@
-import random
+import unittest
+from unittest.mock import patch
+from src.hello import gerar_numero_secreto, verificar_palpite, jogo_adivinhar_numero  
 
-def jogo_adivinhar_numero():
-    print("Bem-vindo ao jogo 'Adivinhe o Número'!")
-    print("Estou pensando em um número entre 1 e 100.")
+class TestJogoAdivinhaNumero(unittest.TestCase):
 
-    # Gera um número aleatório entre 1 e 100
-    numero_secreto = random.randint(1, 100)
-    tentativas = 0
-    max_tentativas = 10
+    def test_gerar_numero_secreto(self):
+        numero = gerar_numero_secreto()
+        self.assertGreaterEqual(numero, 1)
+        self.assertLessEqual(numero, 100)
 
-    while tentativas < max_tentativas:
-        try:
-            # Solicita um palpite ao usuário
-            palpite = int(input("Qual é o seu palpite? "))
-            tentativas += 1
+    def test_verificar_palpite(self):
+        numero_secreto = 50
+        self.assertEqual(verificar_palpite(numero_secreto, 30), "maior")
+        self.assertEqual(verificar_palpite(numero_secreto, 70), "menor")
+        self.assertEqual(verificar_palpite(numero_secreto, 50), "certo")
 
-            if palpite < numero_secreto:
-                print("O número é maior do que isso.")
-            elif palpite > numero_secreto:
-                print("O número é menor do que isso.")
-            else:
-                print(f"Parabéns! Você adivinhou o número {numero_secreto} em {tentativas} tentativas!")
-                break
-        except ValueError:
-            print("Por favor, insira um número válido.")
+  
+    def test_jogo_adivinhar_numero(self, mock_print, mock_input):
+        with patch('seu_arquivo.gerar_numero_secreto', return_value=50):  # Ajuste o nome do arquivo
+            resultado = jogo_adivinhar_numero(tentativas_max=10)
+            self.assertTrue(resultado)
+            mock_print.assert_any_call("Parabéns! Você adivinhou o número 50 em 3 tentativas!")
 
-    if palpite != numero_secreto:
-        print(f"Você perdeu! O número secreto era {numero_secreto}.")
-
-if __name__ == "__main__":
-    jogo_adivinhar_numero()
+if __name__ == '__main__':
+    unittest.main()
