@@ -17,7 +17,7 @@ class TestJogoAdivinhaNumero(unittest.TestCase):
 
   
     def test_jogo_adivinhar_numero(self, mock_print, mock_input):
-        with patch('seu_arquivo.gerar_numero_secreto', return_value=50):  # Ajuste o nome do arquivo
+        with patch('src.hello.gerar_numero_secreto', return_value=50):  
             resultado = jogo_adivinhar_numero(tentativas_max=10)
             self.assertTrue(resultado)
             mock_print.assert_any_call("Parabéns! Você adivinhou o número 50 em 3 tentativas!")
