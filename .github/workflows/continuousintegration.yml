@@ -17,35 +17,37 @@ jobs:
           linter: pylint
 
 
-docker:
+  docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
+    - name: Checkout
+      uses: actions/checkout@v4
+      
         # Add support for more platforms with QEMU (optional)
         # https://github.com/docker/setup-qemu-action
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build
-        uses: docker/build-push-action@v6
-        with:
-          push: false
-          tags: user/app:latest
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: false
+        tags: user/app:latest
 
 
-testes:
-  runs-on: ubuntu-latest
-  steps:
-  - uses: actions/checkout@v4
-  - name: Set up Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: '3.9'
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+      
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
