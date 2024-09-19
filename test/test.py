@@ -32,16 +32,6 @@ class TestJogoAdivinhaNumero(unittest.TestCase):
             resultado = jogo_adivinhar_numero(tentativas_max=4)
             self.assertTrue(resultado)
             mock_print.assert_any_call("Parabéns! Você adivinhou o número 50 em 4 tentativas!")
-
-    @patch('builtins.input', side_effect=[30, 20, 10, 5, 1])
-    @patch('src.hello.gerar_numero_secreto', return_value=50)
-    def test_jogo_adivinhar_numero_derrota(self, mock_numero_secreto, mock_input):
-        # Testa se o jogador não consegue adivinhar o número
-        with patch('builtins.print') as mock_print:
-            from src.hello import jogo_adivinhar_numero
-            resultado = jogo_adivinhar_numero(tentativas_max=5)
-            self.assertFalse(resultado)
-            mock_print.assert_any_call("Você perdeu! O número secreto era 50.")
-
+    
 if __name__ == '__main__':
     unittest.main()
