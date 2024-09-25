@@ -1,6 +1,13 @@
 import unittest
 from unittest.mock import patch
-from src.hello import gerar_numero_secreto, verificar_palpite, jogo_adivinhar_numero  
+import sys
+import os
+
+# Adiciona o diretório src ao PYTHONPATH
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
+from src.hello import gerar_numero_secreto, verificar_palpite, jogo_adivinhar_numero
+  
 
 class TestJogoAdivinhaNumero(unittest.TestCase):
 
